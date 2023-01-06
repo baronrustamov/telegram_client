@@ -1,3 +1,6 @@
+## 0.3.90
+- fix bug edit message text
+
 ## 0.3.88
 - fix bug
 

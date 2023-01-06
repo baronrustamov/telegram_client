@@ -1065,14 +1065,16 @@ class Tdlib extends LibTdJson {
   /// //
   Future<Map> request(
     String method, {
-    Map parameters = const {},
+    Map? parameters,
     int? clientId,
     bool isVoid = false,
     String? extra,
     bool? iSAutoGetChat,
   }) async {
     clientId ??= client_id;
+    parameters ??= {};
 
+    iSAutoGetChat ??= false;
     if (parameters["chat_id"] is String &&
         RegExp(r"^(@)?[a-z0-9_]+", caseSensitive: false)
             .exec(parameters["chat_id"])) {
@@ -1193,14 +1195,13 @@ class Tdlib extends LibTdJson {
           message_id: parameters["message_id"],
           text: parameters["text"],
           inline_message_id: parameters["inline_message_id"],
-          parse_mode: (parameters["parse_mode"] ?? "" is String)
+          parse_mode: (parameters["parse_mode"] is String)
               ? parameters["parse_mode"]
               : "html",
-          entities: (parameters["entities"] ?? [] is List)
-              ? parameters["entities"]
-              : [],
+          entities:
+              (parameters["entities"] is List) ? parameters["entities"] : [],
           disable_web_page_preview:
-              (parameters["disable_web_page_preview"] ?? false is bool)
+              (parameters["disable_web_page_preview"] is bool)
                   ? parameters["disable_web_page_preview"]
                   : false,
           reply_markup: parameters["reply_markup"],

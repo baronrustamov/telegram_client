@@ -2,7 +2,7 @@
 
 import 'package:telegram_client/telegram_client.dart';
 import 'package:universal_io/io.dart';
-import 'package:path/path.dart' as p;
+// import 'package:path/path.dart' as p;
 
 /// extension tdlib for make
 extension TelegramBotApiTypeFileMethodExtensions on TelegramBotApi {
@@ -15,10 +15,11 @@ extension TelegramBotApiTypeFileMethodExtensions on TelegramBotApi {
       } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false)
           .hasMatch(content)) {
         File file = File(content);
+        // file.uri.;
         data = {
           "@type": 'inputFileLocal',
-          "data": buffer(file.readAsBytesSync(),
-              name: "${p.basename(file.path)}.${p.extension(file.path)}")
+          "data":
+              buffer(file.readAsBytesSync(), name: file.uri.pathSegments.last),
         };
       } else if (content is int) {
         data = {"@type": 'inputFileId', "data": content};

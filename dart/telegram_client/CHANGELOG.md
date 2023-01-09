@@ -1,4 +1,7 @@
 ## 0.3.91
+- fix flutter 3.3.10
+
+## 0.3.91
 - remove package path
   
 ## 0.3.90
